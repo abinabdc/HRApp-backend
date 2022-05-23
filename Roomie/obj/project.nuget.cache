@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jHuyQ0qjV6/rvNrT8K8SUusddiq5KxsOrUy+r1Hvt3CM6DUuLYgzWPsHWVFl7UHR/ZW3yt6IcfWZqmg0pxeQHg==",
+  "dgSpecHash": "r5Q6lMczzbYsZ0G/N5i9LCz0yuMb15vB3A4Ihzn1Snn9GxFuLIQ6AdW8X0aNfQNukalkJ0sog1c+PPwkuAAzHA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\abina\\Music\\Template For user authentication\\Roomie\\Roomie.csproj",
+  "projectFilePath": "C:\\Users\\abina\\Music\\HR-App\\Roomie\\Roomie.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\abina\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\abina\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

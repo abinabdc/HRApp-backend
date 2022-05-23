@@ -6,7 +6,7 @@ namespace Roomie.Interfaces
     {
         void Update(Department department);
         Task<bool> SaveAllAsync();
-        Task<IEnumerable<Department>> GetUsersAsync();
+        Task<IEnumerable<Department>> GetDepartmentsAsync();
         Task<Department> GetDepartmentById(int id);
         Task<Department> GetDepartmentByName(string DepartmentName);
 

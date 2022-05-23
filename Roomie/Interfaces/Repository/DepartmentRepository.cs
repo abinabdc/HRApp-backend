@@ -22,7 +22,7 @@ namespace Roomie.Interfaces.Repository
             return await _context.Departments.Where(p => p.DepartmentName == DepartmentName).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Department>> GetUsersAsync()
+        public async Task<IEnumerable<Department>> GetDepartmentsAsync()
         {
             return await _context.Departments.ToListAsync();
         }
