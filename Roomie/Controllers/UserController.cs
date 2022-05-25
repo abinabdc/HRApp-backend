@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Roomie.Data;
 using Roomie.Dtos.ForResponse;
 using Roomie.Entity;
+using Roomie.Extensions;
 using Roomie.Interfaces;
 
 namespace Roomie.Controllers
@@ -32,6 +34,14 @@ namespace Roomie.Controllers
         {
             var users = await _userRepo.GetUsersAsync();
             return Ok(users);
+        }
+        [HttpGet("my-details")]
+        [Authorize]
+        public async Task<ActionResult<AppUserDto>> GetDetails()
+        {
+            var username = User.GetUsername();
+            var userId = Int32.Parse(username);
+            return await _userRepo.GetUserByIdAsync(userId);
         }
 
 

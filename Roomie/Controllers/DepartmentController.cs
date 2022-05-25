@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Roomie.Data;
+using Roomie.Dtos.ForResponse;
 using Roomie.Entity;
 using Roomie.Interfaces;
 
@@ -12,15 +14,17 @@ namespace Roomie.Controllers
     {
         private readonly DataContext _context;
         private readonly IDepartmentService _departmentService;
-        public DepartmentController(DataContext ctx, IDepartmentService dpt)
+        private readonly IMapper _mapper;
+        public DepartmentController(IMapper mapper, DataContext ctx, IDepartmentService dpt)
         {
+            _mapper = mapper;
             _context = ctx;
             _departmentService = dpt;
 
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Department>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> GetCategories()
         {
             var result = await _departmentService.GetDepartmentsAsync();
             return Ok(result);

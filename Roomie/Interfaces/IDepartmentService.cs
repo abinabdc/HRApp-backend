@@ -1,4 +1,5 @@
-﻿using Roomie.Entity;
+﻿using Roomie.Dtos.ForResponse;
+using Roomie.Entity;
 
 namespace Roomie.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Roomie.Interfaces
     {
         void Update(Department department);
         Task<bool> SaveAllAsync();
-        Task<IEnumerable<Department>> GetDepartmentsAsync();
+        Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync();
         Task<Department> GetDepartmentById(int id);
         Task<Department> GetDepartmentByName(string DepartmentName);
 

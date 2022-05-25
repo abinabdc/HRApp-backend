@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using Roomie.Data;
+using Roomie.Dtos.ForResponse;
 using Roomie.Entity;
 
 namespace Roomie.Interfaces.Repository
@@ -7,9 +10,11 @@ namespace Roomie.Interfaces.Repository
     public class DepartmentRepository : IDepartmentService
     {
         private readonly DataContext _context;
-        public DepartmentRepository(DataContext ctx)
+        private readonly IMapper _mapper;
+        public DepartmentRepository(IMapper mapper, DataContext ctx)
         {
             _context = ctx;
+            _mapper = mapper;
 
         }
         public async Task<Department> GetDepartmentById(int id)
@@ -22,9 +27,9 @@ namespace Roomie.Interfaces.Repository
             return await _context.Departments.Where(p => p.DepartmentName == DepartmentName).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Department>> GetDepartmentsAsync()
+        public async Task<IEnumerable<DepartmentDto>> GetDepartmentsAsync()
         {
-            return await _context.Departments.ToListAsync();
+            return await _context.Departments.Include(p=>p.Users).ProjectTo<DepartmentDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()

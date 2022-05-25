@@ -14,7 +14,11 @@ namespace Roomie.Helpers
             
             CreateMap<AppUser, AppUserDto>()
                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture.Url));
+            
             CreateMap<AppUserRole, RoleDto>();
+            CreateMap<AppUser, EmployeesInDepartment>();
+            CreateMap<Department, DepartmentDto>();
+            
 
             
             /*.ForMember(dest => dest.PostedBy.Id, opt => opt.MapFrom(src => src.PostedBy.Id))

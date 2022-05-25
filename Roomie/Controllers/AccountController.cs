@@ -36,7 +36,11 @@ namespace Roomie.Controllers
             {
                 UserName = registerDto.Username.ToLower(),
                 Gender = registerDto.Gender,
-                PhoneNumber = registerDto.ContactNumber
+                PhoneNumber = registerDto.ContactNumber,
+                DepartmentId = registerDto.DepartmentId,
+                position = registerDto.Position,
+                
+
 
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
