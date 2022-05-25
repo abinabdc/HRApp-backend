@@ -12,7 +12,7 @@ namespace Roomie.Dtos.ForResponse
         /*public List<Post> Posts { get; set; }*/
         public string ProfilePicture { get; set; }
         public ICollection<RoleDto> UserRoles { get; set; }
-
+        public List<Leave> Leaves { get; set; }
         public int DepartmentId { get; set; }
     }
     public class RoleDto
