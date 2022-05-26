@@ -91,8 +91,18 @@ namespace Roomie.Controllers
                         LeaveType = leaveDto.LeaveType
 
                     };
-                    userApplying.DayOffAvailable -= leaveDto.TotalDays;
-                    return Ok(leave);
+                    _context.Leaves.Add(leave);
+                    if (await _leaveRepo.SaveAllAsync())
+                    {
+                        userApplying.DayOffAvailable = userApplying.WFHAvailable - leaveDto.TotalDays;
+                        _context.Users.Update(userApplying);
+                        if (await _userRepo.SaveAllAsync())
+                        {
+                            return Ok("should work now");
+                        }
+
+
+                    }
                 }
                 else
                 {
@@ -111,8 +121,18 @@ namespace Roomie.Controllers
                         LeaveType = leaveDto.LeaveType
 
                     };
-                    userApplying.SickLeaveAvailable -= leaveDto.TotalDays;
-                    return Ok(leave);
+                    _context.Leaves.Add(leave);
+                    if (await _leaveRepo.SaveAllAsync())
+                    {
+                        userApplying.SickLeaveAvailable = userApplying.WFHAvailable - leaveDto.TotalDays;
+                        _context.Users.Update(userApplying);
+                        if (await _userRepo.SaveAllAsync())
+                        {
+                            return Ok("should work now");
+                        }
+
+
+                    }
                 }
                 else
                 {
@@ -131,8 +151,18 @@ namespace Roomie.Controllers
                         LeaveType = leaveDto.LeaveType
 
                     };
-                    userApplying.VacationAvailable -= leaveDto.TotalDays;
-                    return Ok(leave);
+                    _context.Leaves.Add(leave);
+                    if (await _leaveRepo.SaveAllAsync())
+                    {
+                        userApplying.SickLeaveAvailable = userApplying.WFHAvailable - leaveDto.TotalDays;
+                        _context.Users.Update(userApplying);
+                        if (await _userRepo.SaveAllAsync())
+                        {
+                            return Ok("should work now");
+                        }
+
+
+                    }
                 }
                 else
                 {
