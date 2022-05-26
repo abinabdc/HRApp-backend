@@ -9,6 +9,7 @@ namespace Roomie.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<AppUserDto>> GetUsersAsync();
         Task<AppUserDto> GetUserByIdAsync(int id);
+        Task<AppUser> GetUserByIdInternalUse(int id);
         Task<AppUserDto> GetUserByUsernameAsync(string username);
     }
 }

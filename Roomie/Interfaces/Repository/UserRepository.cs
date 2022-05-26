@@ -28,6 +28,15 @@ namespace Roomie.Interfaces.Repository
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<AppUser> GetUserByIdInternalUse(int id)
+        {
+            return await _context.Users
+                .Where(x => x.Id == id)
+                .Include(p => p.ProfilePicture)
+                .Include(p => p.Leaves)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<AppUserDto> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
@@ -39,6 +48,7 @@ namespace Roomie.Interfaces.Repository
         public async Task<IEnumerable<AppUserDto>> GetUsersAsync()
         {
             return await _context.Users
+                .Include(x => x.Leaves)
                 .ProjectTo<AppUserDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
