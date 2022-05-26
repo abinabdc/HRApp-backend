@@ -50,7 +50,7 @@ namespace Roomie.Controllers
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
-            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+            var roleResult = await _userManager.AddToRoleAsync(user, "Employees");
             if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
             return new UserDto
             {

@@ -3,7 +3,7 @@
     public class LeaveDto
     {
        
-        public DateTime FromDate { get; set; }
+        public string FromDate { get; set; }
         public int TotalDays { get; set; }
         public string LeaveType { get; set; }
     }

@@ -76,9 +76,9 @@ namespace Roomie
                 });
             services.AddAuthorization(opt =>
             {
-                opt.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-                opt.AddPolicy("ModeratorRole", policy => policy.RequireRole("Admin", "Moderator"));
-                opt.AddPolicy("MemberRole", policy => policy.RequireRole("Admin", "Moderator","Member"));
+                opt.AddPolicy("Manager", policy => policy.RequireRole("Manager"));
+                opt.AddPolicy("Hr", policy => policy.RequireRole("Hr", "Manager"));
+                opt.AddPolicy("Employee", policy => policy.RequireRole("Hr", "Manager","Employees"));
 
             });
         }
