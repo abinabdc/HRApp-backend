@@ -39,9 +39,14 @@ namespace Roomie.Controllers
                 PhoneNumber = registerDto.ContactNumber,
                 DepartmentId = registerDto.DepartmentId,
                 position = registerDto.Position,
-                
-
-
+                WFHGiven = registerDto.WFHGiven,
+                WFHAvailable = registerDto.WFHGiven,
+                DayOffAvailable = registerDto.DayOffGiven,
+                VacationAvailable = registerDto.VacationGiven,
+                SickLeaveGiven = registerDto.SickLeaveGiven,
+                SickLeaveAvailable = registerDto.SickLeaveGiven,
+                DayOffGiven = registerDto.DayOffGiven,
+                VacationGiven = registerDto.VacationGiven
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (!result.Succeeded) return BadRequest(result.Errors);
