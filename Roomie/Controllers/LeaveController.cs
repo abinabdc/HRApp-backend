@@ -235,11 +235,8 @@ namespace Roomie.Controllers
                     _context.Leaves.Add(leave);
                     if (await _leaveRepo.SaveAllAsync())
                     {
-                        userApplying.DayOffAvailable = userApplying.WFHAvailable - leaveDto.TotalDays;
-                        _context.Users.Update(userApplying);
-                        if (await _userRepo.SaveAllAsync())
                         {
-                            return Ok("should work now");
+                            return Ok("Should work now");
                         }
 
 
@@ -266,11 +263,8 @@ namespace Roomie.Controllers
                     _context.Leaves.Add(leave);
                     if (await _leaveRepo.SaveAllAsync())
                     {
-                        userApplying.SickLeaveAvailable = userApplying.WFHAvailable - leaveDto.TotalDays;
-                        _context.Users.Update(userApplying);
-                        if (await _userRepo.SaveAllAsync())
                         {
-                            return Ok("should work now");
+                            return Ok("Should work now");
                         }
                     }
                 }
@@ -295,11 +289,8 @@ namespace Roomie.Controllers
                     _context.Leaves.Add(leave);
                     if (await _leaveRepo.SaveAllAsync())
                     {
-                        userApplying.SickLeaveAvailable = userApplying.WFHAvailable - leaveDto.TotalDays;
-                        _context.Users.Update(userApplying);
-                        if (await _userRepo.SaveAllAsync())
                         {
-                            return Ok("should work now");
+                            return Ok("Should work now");
                         }
 
 

@@ -62,16 +62,29 @@ namespace Roomie.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+
+            var user = await _userManager.Users.Include(r => r.UserRoles).ThenInclude(r => r.Role).OrderBy(u => u.UserName).SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
             if (user == null) return NotFound($"User with {loginDto.Username} username doesnot exists.");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
             if (!result.Succeeded) return Unauthorized();
+
+            /*user.UserRoles.Select(r => r.Role.Name).ToList()*/
             return new UserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user),
+                Roles = user.UserRoles.Select(r => r.Role.Name).ToList()
             };
+
+
+
+            /*return new UserDto
+            {
+                Username = user.UserName,
+                Token = await _tokenService.CreateToken(user)
+            };*/
+
         }
 /*        [HttpPost]
         public async Task<ActionResult> PostRole()
