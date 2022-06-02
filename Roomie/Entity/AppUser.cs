@@ -7,7 +7,12 @@ namespace Roomie.Entity
     public class AppUser : IdentityUser<int>
     {
 
-     
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public bool FirstTimeLogin { get; set; }
+
+        public string LastName { get; set; }
+
         public string Gender { get; set; }
         public string position { get; set; }
         public UserPhoto ProfilePicture { get; set; }

@@ -35,7 +35,12 @@ namespace Roomie.Controllers
             var user = new AppUser
             {
                 UserName = registerDto.Username.ToLower(),
+                Email = registerDto.Email,
+                FirstName = registerDto.FirstName,
+                MiddleName = registerDto.MiddleName,
+                LastName = registerDto.LastName,
                 Gender = registerDto.Gender,
+                FirstTimeLogin = true,
                 PhoneNumber = registerDto.ContactNumber,
                 DepartmentId = registerDto.DepartmentId,
                 position = registerDto.Position,

@@ -16,6 +16,10 @@ namespace Roomie.Interfaces.Repository
         {
             return await _context.Leaves.Where(p => p.Id == id).FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<Leave>> GetApprovedLeaveAsync()
+        {
+            return await _context.Leaves.Where(p => p.Status == "Approved").ToListAsync();
+        }
 
         public async Task<IEnumerable<Leave>> GetLeavesAsync()
         {

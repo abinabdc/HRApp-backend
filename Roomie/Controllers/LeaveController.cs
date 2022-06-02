@@ -32,6 +32,28 @@ namespace Roomie.Controllers
             var result = await _leaveRepo.GetLeavesAsync();
             return Ok(result);
         }
+        [HttpGet("approved-leaves")]
+        public async Task<ActionResult<IEnumerable<Leave>>> GetApprovedLeaves()
+        {
+            var result = await _leaveRepo.GetApprovedLeaveAsync();
+            return Ok(result);
+        }
+        [HttpGet("today")]
+        public async Task<ActionResult<IEnumerable<int>>> GetTodayLeaves(DateDto dateDto)
+        {
+            
+            var listOfLeaves = await _leaveRepo.GetLeavesAsync();
+            foreach (var leave in listOfLeaves)
+            {
+               
+                if (dateDto.TodayDate >= leave.FromDate && dateDto.TodayDate <= leave.ToDate)
+                {
+                    Ok("there are people with leaves btw");
+                }
+            }
+            return Ok("Nothing matched");
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Leave>> GetLeaveById(int id)
         {
@@ -43,7 +65,7 @@ namespace Roomie.Controllers
         public async Task<ActionResult> ApproveLeave(ApproveLeaveDto approveLeaveDto)
         {
             var userApplying = await _userRepo.GetUserByIdInternalUse(approveLeaveDto.UserId);
-            var leaveBeingEdited = await _leaveRepo.GetLeaveByIdAsync(approveLeaveDto.LeaevId);
+            var leaveBeingEdited = await _leaveRepo.GetLeaveByIdAsync(approveLeaveDto.LeaveId);
 
             if (approveLeaveDto.Approve == true)
             {
@@ -53,7 +75,7 @@ namespace Roomie.Controllers
                 {
                     if (userApplying.WFHAvailable - approveLeaveDto.TotalDays >= 0)
                     {
-                        leaveBeingEdited.Approved = true;
+                        leaveBeingEdited.Status = "Approved";
 
                         _context.Leaves.Update(leaveBeingEdited);
                         if (await _leaveRepo.SaveAllAsync())
@@ -79,7 +101,7 @@ namespace Roomie.Controllers
                 {
                     if (userApplying.DayOffAvailable - approveLeaveDto.TotalDays >= 0)
                     {
-                        leaveBeingEdited.Approved = true;
+                        leaveBeingEdited.Status = "Approved";
 
                         _context.Leaves.Update(leaveBeingEdited);
                         if (await _leaveRepo.SaveAllAsync())
@@ -104,7 +126,7 @@ namespace Roomie.Controllers
                 {
                     if (userApplying.SickLeaveAvailable - approveLeaveDto.TotalDays >= 0)
                     {
-                        leaveBeingEdited.Approved = true;
+                        leaveBeingEdited.Status = "Approved";
 
                         _context.Leaves.Update(leaveBeingEdited);
                         if (await _leaveRepo.SaveAllAsync())
@@ -129,7 +151,7 @@ namespace Roomie.Controllers
                 {
                     if (userApplying.VacationAvailable - approveLeaveDto.TotalDays >= 0)
                     {
-                        leaveBeingEdited.Approved = true;
+                        leaveBeingEdited.Status = "Approved";
 
                         _context.Leaves.Update(leaveBeingEdited);
                         if (await _leaveRepo.SaveAllAsync())
@@ -159,7 +181,7 @@ namespace Roomie.Controllers
             }
             else if (approveLeaveDto.Approve == false)
             {
-                leaveBeingEdited.Approved = false;
+                leaveBeingEdited.Status = "Rejected";
                 _context.Leaves.Update(leaveBeingEdited);
                 if (await _leaveRepo.SaveAllAsync())
                 {
@@ -188,12 +210,12 @@ namespace Roomie.Controllers
                         UserId = int.Parse(username),
                         /*FromDate = leaveDto.FromDate,*/
                         /*FromDate = new(year: 2022, month: 6, day: 19),*/
-                        FromDate = DateTime.Now.ToString("MM/dd/yyyy"),
-
+                        FromDate = leaveDto.FromDate,
+                        ToDate = leaveDto.ToDate,
 
                         TotalDays = leaveDto.TotalDays,
                         LeaveType = leaveDto.LeaveType,
-                        Approved = false
+                        Status = "Pending"
 
                     };
 
@@ -226,8 +248,8 @@ namespace Roomie.Controllers
                     var leave = new Leave
                     {
                         UserId = int.Parse(username),
-                        FromDate = DateTime.Now.ToString("MM/dd/yyyy"),
-                        /*ToDate = leaveDto.ToDate,*/
+                        FromDate = leaveDto.FromDate,
+                        ToDate = leaveDto.ToDate,
                         TotalDays = leaveDto.TotalDays,
                         LeaveType = leaveDto.LeaveType
 
@@ -254,8 +276,8 @@ namespace Roomie.Controllers
                     var leave = new Leave
                     {
                         UserId = int.Parse(username),
-                        FromDate = DateTime.Now.ToString("MM/dd/yyyy"),
-                        /*ToDate = leaveDto.ToDate,*/
+                        FromDate = leaveDto.FromDate,
+                        ToDate = leaveDto.ToDate,
                         TotalDays = leaveDto.TotalDays,
                         LeaveType = leaveDto.LeaveType
 
@@ -280,8 +302,8 @@ namespace Roomie.Controllers
                     var leave = new Leave
                     {
                         UserId = int.Parse(username),
-                        FromDate = DateTime.Now.ToString("MM/dd/yyyy"),
-                        /*ToDate = leaveDto.ToDate,*/
+                        FromDate = leaveDto.FromDate,
+                        ToDate = leaveDto.ToDate,
                         TotalDays = leaveDto.TotalDays,
                         LeaveType = leaveDto.LeaveType
 

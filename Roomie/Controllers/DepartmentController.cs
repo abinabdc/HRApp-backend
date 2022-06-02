@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Roomie.Data;
+using Roomie.Dtos.ForRequest;
 using Roomie.Dtos.ForResponse;
 using Roomie.Entity;
 using Roomie.Interfaces;
@@ -30,12 +31,13 @@ namespace Roomie.Controllers
             return Ok(result);
         }
         [HttpPost("add-department")]
-        public async Task<ActionResult<Department>> PostDepartment(string departmentName)
+        public async Task<ActionResult<Department>> PostDepartment(RequestDepartment reqDepartment)
         {
-            if (await DepartmentExists(departmentName)) return BadRequest("Department already exists");
+            if (await DepartmentExists(reqDepartment.Name)) return BadRequest("Department already exists");
             var department = new Department
             {
-                DepartmentName = departmentName
+                DepartmentName = reqDepartment.Name,
+                Description = reqDepartment.Description,
             };
             _context.Departments.Add(department);
             
