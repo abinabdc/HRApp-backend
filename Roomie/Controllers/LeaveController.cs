@@ -39,10 +39,13 @@ namespace Roomie.Controllers
             return Ok(result);
         }
         [HttpGet("today")]
-        public async Task<ActionResult<IEnumerable<int>>> GetTodayLeaves(DateDto dateDto)
+        public async Task<ActionResult<IEnumerable<Leave>>> GetTodayLeaves(DateDto dateDto)
         {
+            var result = await _leaveRepo.GetTodayLeaves(dateDto);
+            return Ok(result);
             
-            var listOfLeaves = await _leaveRepo.GetLeavesAsync();
+            
+            /*var listOfLeaves = await _leaveRepo.GetLeavesAsync();
             foreach (var leave in listOfLeaves)
             {
                
@@ -50,8 +53,8 @@ namespace Roomie.Controllers
                 {
                     Ok("there are people with leaves btw");
                 }
-            }
-            return Ok("Nothing matched");
+            }*/
+            /*return Ok("Nothing matched");*/
         }
 
         [HttpGet("{id}")]

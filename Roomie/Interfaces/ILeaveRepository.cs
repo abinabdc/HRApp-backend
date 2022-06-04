@@ -1,4 +1,5 @@
-﻿using Roomie.Entity;
+﻿using Roomie.Dtos.ForRequest;
+using Roomie.Entity;
 
 namespace Roomie.Interfaces
 {
@@ -9,6 +10,8 @@ namespace Roomie.Interfaces
         Task<IEnumerable<Leave>> GetLeavesAsync();
         Task<IEnumerable<Leave>> GetApprovedLeaveAsync();
         Task<Leave> GetLeaveByIdAsync(int id);
-        
+        Task<IEnumerable<Leave>> GetTodayLeaves(DateDto dateDto);
+
+
     }
 }
