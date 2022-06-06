@@ -31,6 +31,7 @@ namespace Roomie.Data
         public DbSet<UserPhoto> ProfilePictures { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Leave> Leaves { get; set; }
+        public DbSet<Vaccancy> Vaccancies { get; set; }
 
 
 

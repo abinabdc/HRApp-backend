@@ -43,18 +43,6 @@ namespace Roomie.Controllers
         {
             var result = await _leaveRepo.GetTodayLeaves(dateDto);
             return Ok(result);
-            
-            
-            /*var listOfLeaves = await _leaveRepo.GetLeavesAsync();
-            foreach (var leave in listOfLeaves)
-            {
-               
-                if (dateDto.TodayDate >= leave.FromDate && dateDto.TodayDate <= leave.ToDate)
-                {
-                    Ok("there are people with leaves btw");
-                }
-            }*/
-            /*return Ok("Nothing matched");*/
         }
 
         [HttpGet("{id}")]
