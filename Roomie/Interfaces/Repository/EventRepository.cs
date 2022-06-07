@@ -15,22 +15,22 @@ namespace Roomie.Interfaces.Repository
         }
         public async Task<Event> GetEventByIdAsync(int id)
         {
-            return await _context.Events.Where(p => p.Id == id).FirstOrDefaultAsync();
+            return await _context.Events.Include(p => p.Going).Where(p => p.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Event>> GetEventsAsync()
         {
-            return await _context.Events.ToListAsync();
+            return await _context.Events.Include(p => p.Going).ToListAsync();
         }
 
         public async Task<IEnumerable<Event>> GetTodayEvent(DateDto dateDto)
         {
-            return await _context.Events.Where(p => dateDto.TodayDate >= p.FromDate && dateDto.TodayDate <= p.ToDate).ToListAsync();
+            return await _context.Events.Include(p => p.Going).Where(p => dateDto.TodayDate >= p.FromDate && dateDto.TodayDate <= p.ToDate).ToListAsync();
         }
 
         public async Task<IEnumerable<Event>> GetUpcomingEvents(DateDto dateDto)
         {
-            return await _context.Events.Where(p => dateDto.TodayDate < p.ToDate).ToListAsync();
+            return await _context.Events.Include(p => p.Going).Where(p => dateDto.TodayDate < p.ToDate).ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()

@@ -49,6 +49,7 @@ namespace Roomie
             services.AddScoped<IDepartmentService, DepartmentRepository>();
             services.AddScoped<ILeaveRepository, LeaveService>();
             services.AddScoped<IVaccancyRepository, VaccancyRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddSwaggerGen(c =>
             {
