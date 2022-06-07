@@ -26,12 +26,19 @@ namespace Roomie.Data
                 .WithOne(u => u.Role)
                 .HasForeignKey(u => u.RoleId)
                 .IsRequired();
+            builder.Entity<User_Event>().HasKey(ue => new
+            {
+                ue.AppUserId,
+                ue.EventId
+            });
         }
         
         public DbSet<UserPhoto> ProfilePictures { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Vaccancy> Vaccancies { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<User_Event> Users_Events { get; set; }
 
 
 
