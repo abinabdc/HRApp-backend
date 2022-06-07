@@ -40,7 +40,14 @@ namespace Roomie.Controllers
             var result = await _vaccancyRepo.GetVaccancyByIdAsync(id);
             return Ok(result);
         }
-        [HttpGet("change-validity/{id}")]
+        /*[HttpDelete("{id}")]
+        public async Task<ActionResult<Vaccancy>> DeleteVaccancy(int id)
+        {
+            var result = await _vaccancyRepo.GetVaccancyByIdAsync(id);
+            return Ok(result);
+        }*/
+
+        [HttpPut("change-validity/{id}")]
         public async Task<ActionResult> ChangeValidity(int id)
         {
             var result = await _vaccancyRepo.GetVaccancyByIdAsync(id);

@@ -11,7 +11,7 @@
         public bool isValid { get; set; }
         public int DepartmentId { get; set; }
 
-        public Department ForDepartment { get; set; }
+       /* public Department ForDepartment { get; set; }*/
 
 
     }

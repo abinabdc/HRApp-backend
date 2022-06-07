@@ -6,8 +6,6 @@
         public string Experience { get; set; }
         public string Description { get; set; }
         public string SalaryOffered { get; set; }
-        public int DepartmentId { get; set; }
-
-        
+        public int DepartmentId { get; set; }  
     }
 }
