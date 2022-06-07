@@ -11,6 +11,8 @@ namespace Roomie.Interfaces
         Task<IEnumerable<Event>> GetUpcomingEvents(DateDto dateDto);
         Task<Event> GetEventByIdAsync(int id);
         Task<IEnumerable<Event>> GetTodayEvent(DateDto dateDto);
-        
+        Task<bool> UsersAlreadyGoing(int id);
+
+
     }
 }

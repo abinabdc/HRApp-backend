@@ -11,4 +11,9 @@
         public string Location { get; set; }
 
     }
+    public class ReqGoingDto
+    {
+        /*public int UserId { get; set; }*/
+        public int EventId { get; set; }
+    }
 }

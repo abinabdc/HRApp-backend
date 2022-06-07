@@ -42,5 +42,10 @@ namespace Roomie.Interfaces.Repository
         {
             _context.Entry(evt).State = EntityState.Modified;
         }
+
+        public async Task<bool> UsersAlreadyGoing(int id)
+        {
+            return await _context.Users_Events.AnyAsync(x => x.AppUserId == id);
+        }
     }
 }

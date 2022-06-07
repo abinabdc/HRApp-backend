@@ -15,6 +15,7 @@ namespace Roomie.Controllers
     {
         private readonly DataContext _context;
         private readonly IVaccancyRepository _vaccancyRepo;
+        
 
         public VaccancyController(DataContext ctx, IVaccancyRepository repo)
         {
@@ -68,6 +69,8 @@ namespace Roomie.Controllers
                 return BadRequest("Something went wrong while changing the status");
             }
         }
+       
+
 
         [Authorize]
         [HttpPost("new")]

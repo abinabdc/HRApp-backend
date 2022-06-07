@@ -305,8 +305,6 @@ namespace Roomie.Controllers
                         {
                             return Ok("Should work now");
                         }
-
-
                     }
                 }
                 else
